@@ -1,4 +1,5 @@
 import { _decorator, Canvas, Component, director, Node, UITransform, Vec3 } from 'cc';
+import { GameManager } from './GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Ground')
@@ -30,7 +31,8 @@ export class Ground extends Component {
     public tempStartLocation2: Vec3 = new Vec3;
     public tempStartLocation3: Vec3 = new Vec3;
 
-    public gameSpeed: number = 50;
+    public gameManager: GameManager = new GameManager;
+    public gameSpeed: number = 0;
 
     onLoad() {
         this.startUp();
@@ -67,6 +69,8 @@ export class Ground extends Component {
     }
 
     moveGround(deltaTime: number){
+        this.gameSpeed = this.gameManager.speed;
+
         this.tempStartLocation1 = this.ground1.position;
         this.tempStartLocation2 = this.ground2.position;
         this.tempStartLocation3 = this.ground3.position;
