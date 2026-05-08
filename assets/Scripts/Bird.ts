@@ -1,4 +1,4 @@
-import { _decorator, CCFloat, Component, Node } from 'cc';
+import { _decorator, CCFloat, Component, Node, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bird')
@@ -17,7 +17,8 @@ export class Bird extends Component {
     public jumpDuration: number =  3.5;
 
     public birdAnimation: Animation;
-    
+    public birdLocation: Vec3;
+
 
     start() {
 
