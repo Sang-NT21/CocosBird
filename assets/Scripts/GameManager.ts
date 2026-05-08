@@ -59,7 +59,7 @@ export class GameManager extends Component {
     }
 
     update(deltaTime: number) {
-        this.bird.flyBird();
+        
         
     }
 
