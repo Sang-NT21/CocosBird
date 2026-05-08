@@ -83,15 +83,15 @@ export class Ground extends Component {
 
 
         if(this.ground1.position.x <= (0 - this.groundWidth1)) {
-            this.tempStartLocation1.x = canvas.getComponent(UITransform).width;
+            this.tempStartLocation1.x = canvas.getComponent(UITransform).width - 1; //-1 is to fix render gap
         }
 
-        if(this.ground2.position.x <= (0 - this.groundWidth1)) {
-            this.tempStartLocation2.x = canvas.getComponent(UITransform).width;
+        if(this.ground2.position.x <= (0 - this.groundWidth2)) {
+            this.tempStartLocation2.x = canvas.getComponent(UITransform).width - 1;
         }
 
-        if(this.ground3.position.x <= (0 - this.groundWidth1)) {
-            this.tempStartLocation3.x = canvas.getComponent(UITransform).width;
+        if(this.ground3.position.x <= (0 - this.groundWidth3)) {
+            this.tempStartLocation3.x = canvas.getComponent(UITransform).width - 1;
         }
 
         this.ground1.setPosition(this.tempStartLocation1);

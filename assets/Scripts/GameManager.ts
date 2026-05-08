@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, director, EventKeyboard, Input, input, KeyCode } from 'cc';
+import { _decorator, CCInteger, Component, director, EventKeyboard, Input, input, KeyCode, Node } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
@@ -39,12 +39,17 @@ export class GameManager extends Component {
     onLoad() {
         this.initListener();
         this.results.resetScore();
-        director.pause;
+        director.pause();
 
     }
 
     initListener() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
+
+        // Make sure thie size of this node is cover fullscreen to capture touch
+        this.node.on(Node.EventType.TOUCH_START, () => {
+            this.bird.flyBird();
+        });
     }
 
     startGame() {
@@ -54,6 +59,7 @@ export class GameManager extends Component {
     }
 
     update(deltaTime: number) {
+        this.bird.flyBird();
         
     }
 
@@ -69,6 +75,7 @@ export class GameManager extends Component {
                 break;
             case KeyCode.KEY_Q:
                 this.resetGame();
+                this.bird.resetBird();
                 break;
         }
     }
