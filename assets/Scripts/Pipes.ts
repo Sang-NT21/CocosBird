@@ -12,13 +12,15 @@ export class Pipes extends Component {
         type: Node,
         tooltip: 'Top Pipe',
     })
-    public topPipe: Node;
+    public topPipe: Node = null;
 
     @property({
         type: Node,
         tooltip: 'Bottom Pipe',
     })
-    public bottomPipe: Node;
+    public bottomPipe: Node = null;
+
+    public game;
 
     public tempLocationUp: Vec3 = new Vec3(0, 0, 0);
     public tempLocationDown: Vec3 = new Vec3(0, 0, 0);
@@ -26,7 +28,7 @@ export class Pipes extends Component {
     public scene = screen.windowSize;
 
     
-    public game; //this is pipSpeed inside GameManager
+    //public game;
     public pipSpeed: number;
     public tempSpeed: number;
 
@@ -35,6 +37,7 @@ export class Pipes extends Component {
     onLoad() {
         this.game = find('GameManager').getComponent('GameManager');
         this.pipSpeed = this.game.pipSpeed;
+        //this.pipSpeed = this.gameManager.pipSpeed;
         this.initPosition();
         this.isPassed = false;
     }
@@ -50,7 +53,13 @@ export class Pipes extends Component {
 
         if(this.isPassed == false && this.topPipe.position.x <= 0){
             this.isPassed = true;
-            this.game.passPipe();
+            this.game.passPipe(); // Add score method in GameManager
+            //this.gameManager.passPipe(); // Add score method in GameManager
+        }
+
+        if(this.topPipe.position.x < (0 - this.scene.width)){
+            this.game.createPipe();
+            //this.gameManager.createPipe();
             
             this.node.destroy();
         }

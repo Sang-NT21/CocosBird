@@ -2,6 +2,7 @@ import { _decorator, CCInteger, Component, director, EventKeyboard, Input, input
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
+import { PipePool } from './PipePool';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -34,7 +35,11 @@ export class GameManager extends Component {
         type: CCInteger,
     })
     public pipSpeed: number = 200;
-    
+
+    @property({
+        type: PipePool,
+    })
+    public pipePool: PipePool;
 
     onLoad() {
         this.initListener();
@@ -88,11 +93,16 @@ export class GameManager extends Component {
 
     resetGame() {
         this.results.resetScore();
+        this.pipePool.resetPool();
         this.startGame();
     }
 
     passPipe() {
         this.results.addScore();
+    }
+
+    createPipe() {
+        this.pipePool.addPool();
     }
 }
 

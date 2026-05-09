@@ -337,6 +337,7 @@
     "bottomPipe": {
       "__id__": 8
     },
+    "gameManager": null,
     "_id": ""
   },
   {
@@ -351,6 +352,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "b9xkicKHhCiZaK6DnsKRQF"
+    "fileId": "b9xkicKHhCiZaK6DnsKRQF",
+    "targetOverrides": []
   }
 ]

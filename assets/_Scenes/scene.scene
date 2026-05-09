@@ -119,6 +119,9 @@
     },
     "speed": 300,
     "pipSpeed": 200,
+    "pipePool": {
+      "__id__": 34
+    },
     "_id": "12C+CeE9lK3YVRWba1rNeO"
   },
   {
@@ -342,7 +345,7 @@
     "_shutter": 7,
     "_iso": 0,
     "_screenScale": 1,
-    "_visibility": 41943040,
+    "_visibility": 1115684864,
     "_targetTexture": null,
     "_cameraType": -1,
     "_trackingType": 0,
@@ -1135,8 +1138,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -320.00000000000006,
-      "y": -479.99999999999994,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -1152,7 +1155,7 @@
       "y": 1,
       "z": 1
     },
-    "_layer": 1073741824,
+    "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -1173,6 +1176,9 @@
     "pipesPrefab": {
       "__uuid__": "9c3f1207-7d90-4152-97b7-82cbee45ad13",
       "__expectedType__": "cc.Prefab"
+    },
+    "pipePoolHome": {
+      "__id__": 33
     },
     "_id": "5cKEjuj/xFOKZICNsqwfs7"
   },
@@ -1558,7 +1564,8 @@
   },
   {
     "__type__": "cc.PrefabInfo",
-    "fileId": "3b751cdc-cb78-4c2c-947b-dc7b19ed13a5"
+    "fileId": "3b751cdc-cb78-4c2c-947b-dc7b19ed13a5",
+    "targetOverrides": []
   },
   {
     "__type__": "cc.SceneGlobals",
