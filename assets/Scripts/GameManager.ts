@@ -8,6 +8,8 @@ const { ccclass, property } = _decorator;
 @ccclass('GameManager')
 export class GameManager extends Component {
 
+    public static instance: GameManager = null;
+
     @property({
         type: Ground,
         tooltip: 'this is ground'
@@ -42,6 +44,15 @@ export class GameManager extends Component {
     public pipePool: PipePool;
 
     onLoad() {
+        // Singleton
+        if (GameManager.instance === null) {
+            GameManager.instance = this;
+        } else {
+            // Destroy if duplicated
+            this.destroy();
+            return;
+        }
+
         this.initListener();
         this.results.resetScore();
         director.pause();
