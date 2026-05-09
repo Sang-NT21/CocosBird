@@ -84,8 +84,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 187,
-      "y": 173.806,
+      "x": 52,
+      "y": 480,
       "z": 0
     },
     "_lrot": {
@@ -124,12 +124,12 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 52,
-      "height": 320
+      "height": 420
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 1,
-      "y": 1
+      "x": 0,
+      "y": 0
     },
     "_id": ""
   },
@@ -164,7 +164,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -213,8 +213,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 187,
-      "y": -262,
+      "x": 0,
+      "y": -480,
       "z": 0
     },
     "_lrot": {
@@ -253,7 +253,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 52,
-      "height": 320
+      "height": 420
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -293,7 +293,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -337,7 +337,6 @@
     "bottomPipe": {
       "__id__": 8
     },
-    "gameManager": null,
     "_id": ""
   },
   {
