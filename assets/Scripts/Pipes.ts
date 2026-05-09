@@ -1,9 +1,7 @@
 import { _decorator, Component, Node, Vec3, screen, find, UITransform, randomRange, randomRangeInt} from 'cc';
 const { ccclass, property } = _decorator;
 
-const random = (min, max) => {
-    return Math.random() * (max - min) + min;
-}
+import { GameManager } from './GameManager';
 
 const VEC3_LEFT = Object.freeze(new Vec3(-1, 0, 0));
 
@@ -39,8 +37,9 @@ export class Pipes extends Component {
     isPassed : boolean = false;
 
     onLoad() {
-        this.game = find('GameManager').getComponent('GameManager');
-        if (this.game == null){
+        //this.game = find('GameManager').getComponent('GameManager');
+        this.game = GameManager.instance;
+        if (this.game === null){
             console.log("GameManager is NULL.");
         }
 
