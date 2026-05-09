@@ -5,6 +5,8 @@ const random = (min, max) => {
     return Math.random() * (max - min) + min;
 }
 
+const VEC3_LEFT = Object.freeze(new Vec3(-1, 0, 0));
+
 @ccclass('Pipes')
 export class Pipes extends Component {
 
@@ -12,21 +14,25 @@ export class Pipes extends Component {
         type: Node,
         tooltip: 'Top Pipe',
     })
-    public topPipe: Node;
+    public topPipe: Node = null;
 
     @property({
         type: Node,
         tooltip: 'Bottom Pipe',
     })
-    public bottomPipe: Node;
+    public bottomPipe: Node = null;
+
+    public game;
 
     public tempLocationUp: Vec3 = new Vec3(0, 0, 0);
     public tempLocationDown: Vec3 = new Vec3(0, 0, 0);
 
+    public bottomPipeWidth: number = 52;
+
     public scene = screen.windowSize;
 
     
-    public game; //this is pipSpeed inside GameManager
+    //public game;
     public pipSpeed: number;
     public tempSpeed: number;
 
@@ -34,57 +40,68 @@ export class Pipes extends Component {
 
     onLoad() {
         this.game = find('GameManager').getComponent('GameManager');
+        if (this.game == null){
+            console.log("GameManager is NULL.");
+        }
+
+         
         this.pipSpeed = this.game.pipSpeed;
-        this.initPosition();
-        this.isPassed = false;
+        this.bottomPipeWidth = this.bottomPipe.getComponent(UITransform).contentSize.width;
+        //this.pipSpeed = this.gameManager.pipSpeed;
+        
+        
     }
 
 
     start() {
-
+        this.initPosition();
+        this.isPassed = false;
+        
     }
 
     update(deltaTime: number) {
 
         this.calculateMovement(deltaTime);
 
-        if(this.isPassed == false && this.topPipe.position.x <= 0){
+        if(this.isPassed == false && this.bottomPipe.position.x <= 0){
             this.isPassed = true;
-            this.game.passPipe();
+            this.game.passPipe(); // Add score method in GameManager
+            //this.gameManager.passPipe(); // Add score method in GameManager
             
-            this.node.destroy();
+        }
+
+        if(this.bottomPipe.position.x < (0 - this.scene.width)){
+            this.game.createPipe();
+            //this.gameManager.createPipe();
+            this.destroy();
         }
         
     }
 
     initPosition() {
+        this.tempLocationUp.x = (this.scene.width + this.bottomPipeWidth);
+        this.tempLocationDown.x = (this.scene.width);
 
-        this.tempLocationUp.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
-        this.tempLocationDown.x = (this.bottomPipe.getComponent(UITransform).width + this.scene.width);
-
-        let gap = random(90, 100);
-        let topHeight = random(0, 450);
-
-        this.tempLocationUp.y = topHeight;
-        this.tempLocationDown.y = topHeight - (gap * 10);
+        let gap: number = this.randomGapHeight();
+       
+        this.tempLocationUp.y = Math.round(960 / 2) + gap;
+        this.tempLocationDown.y = 0 - Math.round(960 / 2) - gap;
+        
 
         this.topPipe.setPosition(this.tempLocationUp);
         this.bottomPipe.setPosition(this.tempLocationDown);
-
     }
 
     calculateMovement(deltaTime: number) {
         this.tempSpeed = this.pipSpeed * deltaTime;
 
-        this.tempLocationUp = this.bottomPipe.position;
-        this.tempLocationDown = this.topPipe.position;
-        
-        this.tempLocationUp.x -= this.tempSpeed;
-        this.tempLocationDown.x -= this.tempSpeed;
+        this.topPipe.translate(Vec3.RIGHT);
+        this.bottomPipe.translate(VEC3_LEFT);
+    }
 
-        this.topPipe.setPosition(this.tempLocationUp);
-        this.bottomPipe.setPosition(this.tempLocationDown);
-
+    randomGapHeight(): number {
+        let gap = randomRangeInt(100, 150);
+        return gap;
     }
 
 }
