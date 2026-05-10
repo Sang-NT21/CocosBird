@@ -22,6 +22,13 @@ export class BirdAudio extends Component {
     update(deltaTime: number) {
         
     }
+
+    onAudioQueue(index: number) {
+        let audioClip: AudioClip = this.clips[index];
+        
+        this.audioSource.playOneShot(audioClip);
+    }
+
 }
 
 
