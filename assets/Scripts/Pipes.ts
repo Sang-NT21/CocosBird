@@ -20,7 +20,7 @@ export class Pipes extends Component {
     })
     public bottomPipe: Node = null;
 
-    public game;
+    public gameManager;
 
     public tempLocationUp: Vec3 = new Vec3(0, 0, 0);
     public tempLocationDown: Vec3 = new Vec3(0, 0, 0);
@@ -38,13 +38,15 @@ export class Pipes extends Component {
 
     onLoad() {
         //this.game = find('GameManager').getComponent('GameManager');
-        this.game = GameManager.instance;
-        if (this.game === null){
+        this.gameManager = GameManager.instance;
+        if (this.gameManager == null){
             console.log("GameManager is NULL.");
         }
 
-         
-        this.pipSpeed = this.game.pipSpeed;
+        if(this.gameManager){
+            this.pipSpeed = this.gameManager.pipSpeed;
+        }
+
         this.bottomPipeWidth = this.bottomPipe.getComponent(UITransform).contentSize.width;
         //this.pipSpeed = this.gameManager.pipSpeed;
         
@@ -62,16 +64,21 @@ export class Pipes extends Component {
 
         this.calculateMovement(deltaTime);
 
-        if(this.isPassed == false && this.bottomPipe.position.x <= 0){
+        if(this.isPassed === false && this.bottomPipe.position.x <= 0){
             this.isPassed = true;
-            this.game.passPipe(); // Add score method in GameManager
-            //this.gameManager.passPipe(); // Add score method in GameManager
+            if(this.gameManager){
+                this.gameManager.passPipe(); // Add score method in GameManager
+            }
             
         }
 
+        // Destroy pipes after they move off screen
         if(this.bottomPipe.position.x < (0 - this.scene.width)){
-            this.game.createPipe();
-            //this.gameManager.createPipe();
+            
+            if (this.gameManager) {
+                this.gameManager.createPipe();
+            }
+
             this.destroy();
         }
         

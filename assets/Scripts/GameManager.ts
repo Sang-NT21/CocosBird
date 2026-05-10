@@ -45,7 +45,7 @@ export class GameManager extends Component {
 
     onLoad() {
         // Singleton
-        if (GameManager.instance === null) {
+        if (GameManager.instance == null) {
             GameManager.instance = this;
         } else {
             // Destroy if duplicated

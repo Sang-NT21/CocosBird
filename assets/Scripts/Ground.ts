@@ -31,10 +31,15 @@ export class Ground extends Component {
     public tempStartLocation2: Vec3 = new Vec3;
     public tempStartLocation3: Vec3 = new Vec3;
 
-    public gameManager: GameManager = new GameManager;
+    public gameManager: GameManager;
     public gameSpeed: number = 0;
 
     onLoad() {
+        this.gameManager = GameManager.instance;
+        if (this.gameManager == null){
+            console.log("GameManager is NULL.");
+        }
+
         this.startUp();
 
     }
@@ -69,7 +74,9 @@ export class Ground extends Component {
     }
 
     moveGround(deltaTime: number){
-        this.gameSpeed = this.gameManager.speed;
+        if (this.gameManager) {
+            this.gameSpeed = this.gameManager.speed;
+        }
 
         this.tempStartLocation1 = this.ground1.position;
         this.tempStartLocation2 = this.ground2.position;
