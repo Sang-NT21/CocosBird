@@ -18,23 +18,26 @@
         "__id__": 2
       },
       {
+        "__id__": 56
+      },
+      {
         "__id__": 7
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 55
+      "__id__": 58
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 56
+      "__id__": 59
     },
     "_id": "3b751cdc-cb78-4c2c-947b-dc7b19ed13a5"
   },
   {
     "__type__": "cc.Node",
-    "_name": "GameManager",
+    "_name": "Game-Manager",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -121,6 +124,9 @@
     "pipSpeed": 200,
     "pipePool": {
       "__id__": 35
+    },
+    "birdAudio": {
+      "__id__": 55
     },
     "_id": "12C+CeE9lK3YVRWba1rNeO"
   },
@@ -1823,6 +1829,99 @@
     "_id": "f37EUA1pJL7qWhWDoEtY8s"
   },
   {
+    "__type__": "ac01bAlnSBHxrItbk3qonzy",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 56
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "clips": [
+      {
+        "__uuid__": "e6976e03-1780-4c08-8c42-87eb7780f07e",
+        "__expectedType__": "cc.AudioClip"
+      },
+      {
+        "__uuid__": "2a84998d-f67e-48e7-842a-495764420abb",
+        "__expectedType__": "cc.AudioClip"
+      },
+      {
+        "__uuid__": "2b8c8713-9632-4c75-9783-c4e6deeacca2",
+        "__expectedType__": "cc.AudioClip"
+      },
+      {
+        "__uuid__": "42494336-8248-4004-8092-bffc508492f5",
+        "__expectedType__": "cc.AudioClip"
+      }
+    ],
+    "audioSource": {
+      "__id__": 57
+    },
+    "_id": "fbjBpA6aJFZYHALZxduWLb"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Audio-Manager",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 55
+      },
+      {
+        "__id__": 57
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "c5ctrRcblIOpuOEoVaN+Um"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 56
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": null,
+    "_loop": false,
+    "_playOnAwake": false,
+    "_volume": 0.5,
+    "_id": "e8hsw+yLxN6Yhny/AnqCjB"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "fileId": "3b751cdc-cb78-4c2c-947b-dc7b19ed13a5",
     "targetOverrides": []
@@ -1830,19 +1929,19 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 57
-    },
-    "shadows": {
-      "__id__": 58
-    },
-    "_skybox": {
-      "__id__": 59
-    },
-    "fog": {
       "__id__": 60
     },
-    "octree": {
+    "shadows": {
       "__id__": 61
+    },
+    "_skybox": {
+      "__id__": 62
+    },
+    "fog": {
+      "__id__": 63
+    },
+    "octree": {
+      "__id__": 64
     }
   },
   {
