@@ -19,6 +19,10 @@ export class Bird extends Component {
     public birdAnimation: Animation;
     public birdLocation: Vec3;
 
+    public hitSomething: boolean = false;
+
+
+
     onLoad() {
         this.resetBird();
         this.birdAnimation = this.getComponent(Animation);
