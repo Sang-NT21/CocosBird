@@ -1,4 +1,4 @@
-import { _decorator, Component, Label } from 'cc';
+import { _decorator, Button, Component, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Results')
@@ -15,9 +15,15 @@ export class Results extends Component {
     public highScoreLabel: Label;
 
     @property({
+        type: Button,
+        visible: true,
+    })
+    private _tryAgainButton: Button;
+
+    @property({
         type: Label,
     })
-    public endResultsLabel: Label;
+    public hintLabel: Label;
 
     maxScore: number = 0;
     currentScore: number = 0;
@@ -40,7 +46,6 @@ export class Results extends Component {
 
     resetScore() {
         this.updateScore(0);
-        this.hideResults();
     }
 
     addScore() {
@@ -50,13 +55,20 @@ export class Results extends Component {
     showResults() {
         this.maxScore = Math.max(this.currentScore, this.maxScore);
         this.highScoreLabel.string = "High Score: " + this.maxScore.toString();
-        this.highScoreLabel.enabled = true;
-        this.endResultsLabel.enabled = true;
+        this.highScoreLabel.node.active = true;
+        this._tryAgainButton.node.active = true;
     }
 
     hideResults() {
-        this.highScoreLabel.enabled = false;
-        this.endResultsLabel.enabled = false;
+        this.highScoreLabel.node.active = false;
+        this._tryAgainButton.node.active = false;
+    }
+
+    hideHint() {
+        if (this.hintLabel){
+            this.hintLabel.node.active = false;
+        }
+        
     }
 }
 

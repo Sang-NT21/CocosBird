@@ -1,5 +1,7 @@
-import { _decorator, CCInteger, Component, director, EventKeyboard, Input, input,
-     KeyCode, Node, Contact2DType, Collider2D, IPhysics2DContact } from 'cc';
+import { _decorator, CCInteger, Component, director, Event, EventKeyboard, Input, input,
+     KeyCode, Node, Button, Contact2DType, Collider2D, IPhysics2DContact, 
+     RigidBody2D,
+     Vec2} from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
@@ -61,76 +63,81 @@ export class GameManager extends Component {
             this.destroy();
             return;
         }
-
         this.initListener();
+        this.results.hideResults();
         this.results.resetScore();
         this.isOver = true;
         director.pause();
 
     }
 
+    start() {
+        
+        
+
+    }
+
+    update(deltaTime: number) {
+        if (this.isOver === false) {
+
+            this.birdStruck();
+        }
+        
+    }
+
     initListener() {
-        //input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         // Make sure thie size of this node is cover fullscreen to capture touch
         this.node.on(Node.EventType.TOUCH_START, () => {
 
             if (this.isOver === true) {
                 this.resetGame();
-                this.bird.resetBird();
                 this.startGame();
             } else {
-                this.bird.flyBird();
+                this.bird.flyMovement();
                 this.birdAudio.onAudioQueue(0);
             }
             
-        });
+        }, this);
+
+        // if (this.results && this.results._tryAgainButton) {
+        //     this.results._tryAgainButton.node.on(Button.EventType.CLICK, this.onButtonPressed, this);
+        // }
     }
 
     startGame() {
+        this.results.hideHint();
         this.results.hideResults();
-        director.resume();
 
-    }
-
-    update(deltaTime: number) {
-        if (this.isOver == false) {
-            this.birdStruck();
+        if (this.bird) {
+            this.bird.hitSomething = false;
         }
-        
-    }
 
-    // This is for TESTING
-    // DELETE
-    // onKeyDown(event: EventKeyboard) {
-    //     switch(event.keyCode) {
-    //         case KeyCode.KEY_A:
-    //             this.gameOver();
-    //             break;
-    //         case KeyCode.KEY_P:
-    //             this.results.addScore();
-    //             break;
-    //         case KeyCode.KEY_Q:
-    //             this.resetGame();
-    //             this.bird.resetBird();
-    //             break;
-    //     }
-    // }
-
-    gameOver() {
-        this.birdAudio.onAudioQueue(3);
-        this.isOver = true;
-        this.results.showResults();
-        director.pause();
-
+        this.bird.resetBird();
+        director.resume();
     }
 
     resetGame() {
         this.results.resetScore();
         this.pipePool.resetPool();
         this.isOver = false;
+        
+    }  
+
+    gameOver() {
+        this.isOver = true;
+        this.results.showResults();
+        director.pause();
+    }
+
+    onButtonPressed(event: Event, customEventData: string) {
+        this.resetGame();
         this.startGame();
     }
+
+
+
+
 
     passPipe() {
         this.results.addScore();
@@ -149,15 +156,19 @@ export class GameManager extends Component {
         }
     }
 
-    onBeginContact(self: Collider2D, orther: Collider2D, contact: IPhysics2DContact | null) {
+    onBeginContact(self: Collider2D, other: Collider2D, contact: IPhysics2DContact | null) {
+        
         this.bird.hitSomething = true;
         this.birdAudio.onAudioQueue(2);
+        
+        
     }
 
     birdStruck() {
         this.onContact();
         
         if (this.bird.hitSomething === true) {
+            this.birdAudio.onAudioQueue(3);
             this.gameOver();
         }
     }

@@ -8,5 +8,6 @@
   },
   "physics": {
     "autoSimulation": true
-  }
+  },
+  "layer": []
 }
