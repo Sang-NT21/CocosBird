@@ -99,10 +99,12 @@ export class Pipes extends Component {
     }
 
     calculateMovement(deltaTime: number) {
-        this.tempSpeed = this.pipSpeed * deltaTime;
 
-        this.topPipe.translate(Vec3.RIGHT);
-        this.bottomPipe.translate(VEC3_LEFT);
+        this.tempLocationUp.x -= this.pipSpeed * deltaTime;
+        this.tempLocationDown.x -= this.pipSpeed * deltaTime;
+
+        this.topPipe.setPosition(this.tempLocationUp);
+        this.bottomPipe.setPosition(this.tempLocationDown);
     }
 
     randomGapHeight(): number {
