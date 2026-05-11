@@ -70,7 +70,7 @@ export class Bird extends Component {
     clampPosition() {
         this.node.setPosition(
             this.node.position.x, 
-            math.clamp(this.node.position.y, (0 - this._maxHeight), this._maxHeight - this._birdHeight), 
+            math.clamp(this.node.position.y, (0 - this._maxHeight), this._maxHeight - (this._birdHeight * 2)), 
             this.node.position.z
         );
     }

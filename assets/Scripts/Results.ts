@@ -1,4 +1,4 @@
-import { _decorator, Button, Component, Label } from 'cc';
+import { _decorator, Button, Component, Label, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Results')
@@ -25,12 +25,20 @@ export class Results extends Component {
     })
     public hintLabel: Label;
 
+    @property({
+        type: Node,
+        tooltip: 'Backdrop for Game Settings UI',
+        visible: true,
+    })
+    private _settingsBackdrop: Node;
+
     maxScore: number = 0;
     currentScore: number = 0;
 
 
 
     start() {
+        this.closeSetting();
         this.hideResults();
 
     }
@@ -67,8 +75,19 @@ export class Results extends Component {
     hideHint() {
         if (this.hintLabel){
             this.hintLabel.node.active = false;
+        } 
+    }
+
+    showSettings() {
+        if(this._settingsBackdrop){
+            this._settingsBackdrop.active = true;
         }
-        
+    }
+
+    closeSetting() {
+        if(this._settingsBackdrop){
+            this._settingsBackdrop.active = false;
+        }
     }
 }
 

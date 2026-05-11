@@ -7,6 +7,7 @@ import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { BirdAudio } from './Audio/BirdAudio';
+import { BackgroundAudio } from './Audio/BackgroundAudio';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -52,7 +53,14 @@ export class GameManager extends Component {
     })
     public birdAudio: BirdAudio;
 
+    @property({
+        type: BackgroundAudio,
+        visible: true,
+    })
+    private _backgroundAudio: BackgroundAudio;
+
     public isOver: boolean = false;
+    //private _isBGMusicToggle: boolean = true;
 
     onLoad() {
         // Singleton
@@ -114,6 +122,10 @@ export class GameManager extends Component {
         }
 
         this.bird.resetBird();
+
+        // if (this._backgroundAudio){
+        //     this._backgroundAudio.playBackgroundMusic();
+        // }
         director.resume();
     }
 
@@ -172,6 +184,16 @@ export class GameManager extends Component {
             this.gameOver();
         }
     }
+
+    // enableBGMusic() {
+    //     this._isBGMusicToggle = true;
+    //     this._backgroundAudio.playBackgroundMusic();
+    // }
+
+    // disableBGMusic() {
+    //     this._isBGMusicToggle = false;
+    //     this._backgroundAudio.stopBackgroundMusic();
+    // }
 }
 
 
