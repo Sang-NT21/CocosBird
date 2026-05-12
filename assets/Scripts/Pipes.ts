@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, screen, find, UITransform, randomRange, randomRangeInt} from 'cc';
+import { _decorator, Component, Node, Vec3, screen, find, UITransform, randomRange, randomRangeInt, CCInteger} from 'cc';
 const { ccclass, property } = _decorator;
 
 import { GameManager } from './GameManager';
@@ -7,6 +7,20 @@ const VEC3_LEFT = Object.freeze(new Vec3(-1, 0, 0));
 
 @ccclass('Pipes')
 export class Pipes extends Component {
+
+    @property({
+        type: CCInteger,
+        tooltip: 'Lowest pipes gap position.y',
+        visible: true,
+    })
+    private _lowestGap: number = 0;
+
+     @property({
+        type: CCInteger,
+        tooltip: 'Highest pipes gap position.y',
+        visible: true,
+    })
+    private _highestGap: number = 300;
 
     @property({
         type: Node,
@@ -28,6 +42,8 @@ export class Pipes extends Component {
     public bottomPipeWidth: number = 52;
 
     public scene = screen.windowSize;
+
+    
 
     
     //public game;
@@ -88,10 +104,9 @@ export class Pipes extends Component {
         this.tempLocationUp.x = (this.scene.width * (3/5) + this.bottomPipeWidth);
         this.tempLocationDown.x = (this.scene.width * (3/5));
 
-        let gap: number = this.randomGapHeight();
-       
-        this.tempLocationUp.y = Math.round(960 / 2) + gap;
-        this.tempLocationDown.y = 0 - Math.round(960 / 2) - gap;
+        let gap: number = this.randomGapHeight(0, 300);
+        this.tempLocationDown.y = this.bottomPipe.position.y + gap;
+        this.tempLocationUp.y = this.topPipe.position.y + gap;
         
 
         this.topPipe.setPosition(this.tempLocationUp);
@@ -107,8 +122,8 @@ export class Pipes extends Component {
         this.bottomPipe.setPosition(this.tempLocationDown);
     }
 
-    randomGapHeight(): number {
-        let gap = randomRangeInt(100, 150);
+    randomGapHeight(lowestGap: number, highestHap: number): number {
+        let gap = randomRangeInt(lowestGap, highestHap);
         return gap;
     }
 
