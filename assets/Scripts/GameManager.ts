@@ -3,7 +3,7 @@ import { _decorator, CCInteger, Component, director, Event, EventKeyboard, Input
      RigidBody2D,
      Vec2} from 'cc';
 import { Ground } from './Ground';
-import { Results } from './Results';
+import { UIManager } from './UI/UIManager';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { AudioManager } from './Audio/AudioManager';
@@ -22,10 +22,11 @@ export class GameManager extends Component {
     public ground: Ground;
 
     @property({
-        type: Results,
-        tooltip: 'Results UI Node'
+        type: UIManager,
+        tooltip: 'Script to manage UI',
+        visible: true,
     })
-    public results: Results;
+    private _uiManager: UIManager;
 
     @property({
         type: Bird,
@@ -73,8 +74,8 @@ export class GameManager extends Component {
             return;
         }
         this.initListener();
-        this.results.hideResults();
-        this.results.resetScore();
+        this._uiManager.hideResults();
+        this._uiManager.resetScore();
         this.isOver = true;
         director.pause();
 
@@ -115,8 +116,8 @@ export class GameManager extends Component {
     }
 
     startGame() {
-        this.results.hideHint();
-        this.results.hideResults();
+        this._uiManager.hideHint();
+        this._uiManager.hideResults();
 
         if (this.bird) {
             this.bird.hitSomething = false;
@@ -131,7 +132,7 @@ export class GameManager extends Component {
     }
 
     resetGame() {
-        this.results.resetScore();
+        this._uiManager.resetScore();
         this.pipePool.resetPool();
         this.isOver = false;
         
@@ -139,7 +140,7 @@ export class GameManager extends Component {
 
     gameOver() {
         this.isOver = true;
-        this.results.showResults();
+        this._uiManager.showResults();
         director.pause();
     }
 
@@ -153,7 +154,7 @@ export class GameManager extends Component {
 
 
     passPipe() {
-        this.results.addScore();
+        this._uiManager.addScore();
         this._audioManager.onAudioQueue(1);
     }
 
@@ -185,16 +186,6 @@ export class GameManager extends Component {
             this.gameOver();
         }
     }
-
-    // enableBGMusic() {
-    //     this._isBGMusicToggle = true;
-    //     this._backgroundAudio.playBackgroundMusic();
-    // }
-
-    // disableBGMusic() {
-    //     this._isBGMusicToggle = false;
-    //     this._backgroundAudio.stopBackgroundMusic();
-    // }
 }
 
 
