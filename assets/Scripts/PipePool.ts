@@ -41,7 +41,7 @@ export class PipePool extends Component {
     
         addPool() {
             if(this.pool.size() > 0) {
-                this.createdPipe = this.pool.get(); // Get the last created Node in Pool
+                this.createdPipe = this.pool.get(); // Get the last created Node in NodePool
             } else {
                 this.createdPipe = instantiate(this.pipesPrefab);
             }

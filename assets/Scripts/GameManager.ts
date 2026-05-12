@@ -109,10 +109,6 @@ export class GameManager extends Component {
             }
             
         }, this);
-
-        // if (this.results && this.results._tryAgainButton) {
-        //     this.results._tryAgainButton.node.on(Button.EventType.CLICK, this.onButtonPressed, this);
-        // }
     }
 
     startGame() {
@@ -125,9 +121,6 @@ export class GameManager extends Component {
 
         this.bird.resetBird();
 
-        // if (this._backgroundAudio){
-        //     this._backgroundAudio.playBackgroundMusic();
-        // }
         director.resume();
     }
 

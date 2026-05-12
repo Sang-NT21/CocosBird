@@ -73,20 +73,20 @@ export class Pipes extends Component {
         }
 
         // Destroy pipes after they move off screen
-        if(this.bottomPipe.position.x < (0 - this.scene.width)){
+        if(this.bottomPipe.position.x < (0 - this.scene.width * (3/4))){
             
             if (this.gameManager) {
                 this.gameManager.createPipe();
             }
 
-            this.destroy();
+            this.node.destroy();
         }
         
     }
 
     initPosition() {
-        this.tempLocationUp.x = (this.scene.width + this.bottomPipeWidth);
-        this.tempLocationDown.x = (this.scene.width);
+        this.tempLocationUp.x = (this.scene.width * (3/5) + this.bottomPipeWidth);
+        this.tempLocationDown.x = (this.scene.width * (3/5));
 
         let gap: number = this.randomGapHeight();
        
