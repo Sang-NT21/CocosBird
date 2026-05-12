@@ -125,8 +125,8 @@
     "pipePool": {
       "__id__": 21
     },
-    "birdAudio": {
-      "__id__": 68
+    "_audioManager": {
+      "__id__": 69
     },
     "_backgroundAudio": {
       "__id__": 71
@@ -2442,7 +2442,22 @@
     "_id": "c5ctrRcblIOpuOEoVaN+Um"
   },
   {
-    "__type__": "ac01bAlnSBHxrItbk3qonzy",
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 67
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": null,
+    "_loop": false,
+    "_playOnAwake": false,
+    "_volume": 0.5,
+    "_id": "e8hsw+yLxN6Yhny/AnqCjB"
+  },
+  {
+    "__type__": "36dd1pjnSZMAJQyp4K99rVX",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2469,24 +2484,9 @@
       }
     ],
     "audioSource": {
-      "__id__": 69
+      "__id__": 68
     },
-    "_id": "fbjBpA6aJFZYHALZxduWLb"
-  },
-  {
-    "__type__": "cc.AudioSource",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 67
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "_clip": null,
-    "_loop": false,
-    "_playOnAwake": false,
-    "_volume": 0.5,
-    "_id": "e8hsw+yLxN6Yhny/AnqCjB"
+    "_id": "fbmZoM4pRAjZN3ZY6RNLkW"
   },
   {
     "__type__": "cc.AudioSource",
