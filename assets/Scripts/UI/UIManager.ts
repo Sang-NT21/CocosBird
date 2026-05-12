@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Button } from 'cc';
+import { _decorator, Component, Node, Label, Button, director } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIManager')
@@ -79,6 +79,7 @@ export class UIManager extends Component {
     
         showSettings() {
             if(this._settingsBackdrop){
+                director.pause();
                 this._settingsBackdrop.active = true;
             }
         }
@@ -86,6 +87,7 @@ export class UIManager extends Component {
         closeSetting() {
             if(this._settingsBackdrop){
                 this._settingsBackdrop.active = false;
+                director.resume();
             }
         }
 }
