@@ -2235,11 +2235,7 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "clickEvents": [
-      {
-        "__id__": 63
-      }
-    ],
+    "clickEvents": [],
     "_interactable": true,
     "_transition": 0,
     "_normalColor": {
@@ -2282,7 +2278,11 @@
     "_target": {
       "__id__": 56
     },
-    "checkEvents": [],
+    "checkEvents": [
+      {
+        "__id__": 63
+      }
+    ],
     "_isChecked": true,
     "_checkMark": {
       "__id__": 59

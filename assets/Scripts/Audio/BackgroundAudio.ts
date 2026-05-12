@@ -24,9 +24,7 @@ export class BackgroundAudio extends Component {
     }
 
     update(deltaTime: number) {
-        if(this._toggle){
-            this._isBGMusic = this._toggle.isChecked;
-        }
+       
     }
     
     playBackgroundMusic() {
@@ -39,6 +37,7 @@ export class BackgroundAudio extends Component {
 
     onToggleMusicCheck() {
         if(this._toggle){
+            this._isBGMusic = this._toggle.isChecked;
             if(this._isBGMusic === true){
                 this.playBackgroundMusic();
             } else {    
