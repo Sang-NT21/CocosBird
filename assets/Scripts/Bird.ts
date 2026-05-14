@@ -8,20 +8,27 @@ export class Bird extends Component {
         type: CCFloat,
         tooltip: 'How high can player bird flies'
     })
+    // How much the bird moves up in one flap.
     public jumpHeight: number = 3.5;
 
     @property({
         type: CCFloat,
         tooltip: 'How long can player bird flies'
     })
+    // How long one upward tween movement takes.
     public jumpDuration: number =  3.5;
 
+    // Reference to bird wing animation component.
     public birdAnimation: Animation;
+    // Stores spawn/reset position for bird.
     public birdLocation: Vec3;
 
+    // True when bird collides with obstacle/ground.
     public hitSomething: boolean = false;
 
+    // Highest Y position bird is allowed to reach on screen.
     private _maxHeight: number;
+    // Bird visual height used for movement limit calculations.
     public _birdHeight: number;
 
 
@@ -46,12 +53,20 @@ export class Bird extends Component {
         
     }
 
+    /**
+     * Moves bird back to start position.
+     * @returns Bird position becomes `(0, 0, 0)`.
+     */
     resetBird() {
         this.birdLocation = new Vec3(0, 0, 0);
         this.node.setPosition(this.birdLocation);
 
     }
 
+    /**
+     * Makes bird flap upward.
+     * @returns Starts upward tween and bird animation if max height is not reached.
+     */
     flyMovement() {
         this.birdAnimation.stop();
         if (this.node.position.y <= this._maxHeight - this._birdHeight) {
@@ -67,6 +82,10 @@ export class Bird extends Component {
 
     }
 
+    /**
+     * Keeps bird inside vertical screen limits.
+     * @returns Bird Y position is clamped between min and max range.
+     */
     clampPosition() {
         this.node.setPosition(
             this.node.position.x, 
@@ -76,5 +95,3 @@ export class Bird extends Component {
     }
 
 }
-
-

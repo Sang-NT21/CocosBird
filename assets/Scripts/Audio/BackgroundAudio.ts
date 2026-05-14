@@ -8,6 +8,7 @@ export class BackgroundAudio extends Component {
         type: AudioSource,
         visible: true,
     })
+    // AudioSource that plays looping background music.
     private _audioSource: AudioSource;
 
 
@@ -15,8 +16,10 @@ export class BackgroundAudio extends Component {
         type: Toggle,
         visible: true,
     })
+    // UI toggle used to turn music on/off.
     private _toggle: Toggle;
 
+    // Cached toggle state for background music.
     private _isBGMusic: boolean = true;
 
     start() {
@@ -27,14 +30,26 @@ export class BackgroundAudio extends Component {
        
     }
     
+    /**
+     * Starts background music.
+     * @returns Background audio starts playing.
+     */
     playBackgroundMusic() {
         this._audioSource.play();
     }
 
+    /**
+     * Stops background music.
+     * @returns Background audio is stopped.
+     */
     stopBackgroundMusic() {
         this._audioSource.stop();
     }
 
+    /**
+     * Runs when music toggle value changes.
+     * @returns Music is played or stopped based on toggle state.
+     */
     onToggleMusicCheck() {
         if(this._toggle){
             this._isBGMusic = this._toggle.isChecked;

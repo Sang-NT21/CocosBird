@@ -13,6 +13,7 @@ export class Pipes extends Component {
         tooltip: 'Lowest pipes gap position.y',
         visible: true,
     })
+    // Minimum random offset used for pipe gap vertical position.
     private _lowestGap: number = 0;
 
      @property({
@@ -20,36 +21,47 @@ export class Pipes extends Component {
         tooltip: 'Highest pipes gap position.y',
         visible: true,
     })
+    // Maximum random offset used for pipe gap vertical position.
     private _highestGap: number = 300;
 
     @property({
         type: Node,
         tooltip: 'Top Pipe',
     })
+    // Reference to top pipe node inside this prefab.
     public topPipe: Node = null;
 
     @property({
         type: Node,
         tooltip: 'Bottom Pipe',
     })
+    // Reference to bottom pipe node inside this prefab.
     public bottomPipe: Node = null;
 
+    // Shared GameManager instance for score and spawn callbacks.
     public gameManager;
 
+    // Runtime position holder for top pipe movement.
     public tempLocationUp: Vec3 = new Vec3(0, 0, 0);
+    // Runtime position holder for bottom pipe movement.
     public tempLocationDown: Vec3 = new Vec3(0, 0, 0);
 
+    // Cached width of bottom pipe sprite for spawn offset.
     public bottomPipeWidth: number = 52;
 
+    // Current screen size used to calculate spawn/despawn bounds.
     public scene = screen.windowSize;
 
     
 
     
     //public game;
+    // Left movement speed for this pipe set.
     public pipSpeed: number;
+    // Optional temp speed value (currently unused).
     public tempSpeed: number;
 
+    // True after bird passes this pipe set, so score is added only once.
     isPassed : boolean = false;
 
     onLoad() {
@@ -100,6 +112,10 @@ export class Pipes extends Component {
         
     }
 
+    /**
+     * Sets first spawn position for top and bottom pipes.
+     * @returns Pipes are placed at start X with a random Y offset.
+     */
     initPosition() {
         this.tempLocationUp.x = (this.scene.width * (3/5) + this.bottomPipeWidth);
         this.tempLocationDown.x = (this.scene.width * (3/5));
@@ -113,6 +129,11 @@ export class Pipes extends Component {
         this.bottomPipe.setPosition(this.tempLocationDown);
     }
 
+    /**
+     * Moves both pipes to the left every frame.
+     * @param deltaTime Time passed since last frame.
+     * @returns Updates current top and bottom pipe positions.
+     */
     calculateMovement(deltaTime: number) {
 
         this.tempLocationUp.x -= this.pipSpeed * deltaTime;
@@ -122,11 +143,15 @@ export class Pipes extends Component {
         this.bottomPipe.setPosition(this.tempLocationDown);
     }
 
+    /**
+     * Creates random Y offset for pipe gap.
+     * @param lowestGap Minimum random value.
+     * @param highestHap Maximum random value.
+     * @returns Random integer for the gap offset.
+     */
     randomGapHeight(lowestGap: number, highestHap: number): number {
         let gap = randomRangeInt(lowestGap, highestHap);
         return gap;
     }
 
 }
-
-

@@ -13,12 +13,14 @@ const { ccclass, property } = _decorator;
 @ccclass('GameManager')
 export class GameManager extends Component {
 
+    // Singleton instance so other scripts can access GameManager.
     public static instance: GameManager = null;
 
     @property({
         type: Ground,
         tooltip: 'this is ground'
     })
+    // Ground script reference for scrolling floor control.
     public ground: Ground;
 
     @property({
@@ -26,43 +28,51 @@ export class GameManager extends Component {
         tooltip: 'Script to manage UI',
         visible: true,
     })
+    // UI controller for score, hint, and result screens.
     private _uiManager: UIManager;
 
     @property({
         type: Bird,
     })
+    // Bird script reference for movement and collision state.
     public bird: Bird;
     
 
     @property({
         type: CCInteger,
     })
+    // Global horizontal game speed (used by ground).
     public speed: number = 300;
 
     @property({
         type: CCInteger,
     })
+    // Pipe movement speed.
     public pipSpeed: number = 200;
 
     @property({
         type: PipePool,
     })
+    // PipePool script for spawning/reusing pipe prefabs.
     public pipePool: PipePool;
 
     @property({
         type: AudioManager,
         visible: true,
     })
+    // Sound effect manager (flap, point, hit, die).
     private _audioManager: AudioManager;
 
     @property({
         type: BackgroundAudio,
         visible: true,
     })
+    // Background music controller (toggle play/stop).
     private _backgroundAudio: BackgroundAudio;
 
+    // True when game is not running (start state or game over).
     public isOver: boolean = false;
-    //private _isBGMusicToggle: boolean = true;
+    
 
     onLoad() {
         // Singleton
@@ -87,6 +97,7 @@ export class GameManager extends Component {
 
     }
 
+  
     update(deltaTime: number) {
         if (this.isOver === false) {
 
@@ -95,6 +106,10 @@ export class GameManager extends Component {
         
     }
 
+    /**
+     * Listens for screen touch.
+     * @returns Starts game on first touch, or makes bird flap while playing.
+     */
     initListener() {
 
         // Make sure thie size of this node is cover fullscreen to capture touch
@@ -111,6 +126,10 @@ export class GameManager extends Component {
         }, this);
     }
 
+    /**
+     * Starts one game round.
+     * @returns Hides hint/result UI, resets bird state, and resumes game time.
+     */
     startGame() {
         this._uiManager.hideHint();
         this._uiManager.hideResults();
@@ -124,6 +143,10 @@ export class GameManager extends Component {
         director.resume();
     }
 
+    /**
+     * Resets data for a new round.
+     * @returns Score is set to 0 and pipes are recreated.
+     */
     resetGame() {
         this._uiManager.resetScore();
         this.pipePool.resetPool();
@@ -131,12 +154,22 @@ export class GameManager extends Component {
         
     }  
 
+    /**
+     * Ends the current round.
+     * @returns Shows result UI and pauses the game.
+     */
     gameOver() {
         this.isOver = true;
         this._uiManager.showResults();
         director.pause();
     }
 
+    /**
+     * Runs when player presses restart button.
+     * @param event Button click event.
+     * @param customEventData Extra string from Button settings.
+     * @returns Resets and starts a new round.
+     */
     onButtonPressed(event: Event, customEventData: string) {
         this.resetGame();
         this.startGame();
@@ -146,15 +179,27 @@ export class GameManager extends Component {
 
 
 
+    /**
+     * Called when bird passes a pipe.
+     * @returns Adds 1 score and plays point sound.
+     */
     passPipe() {
         this._uiManager.addScore();
         this._audioManager.onAudioQueue(1);
     }
 
+    /**
+     * Creates the next pipe set.
+     * @returns Adds one pipe prefab from pool into scene.
+     */
     createPipe() {
         this.pipePool.addPool();
     }
 
+    /**
+     * Connects bird collider to collision callback.
+     * @returns Collision event can now call `onBeginContact`.
+     */
     onContact(){
         let collider = this.bird.getComponent(Collider2D);
 
@@ -163,6 +208,13 @@ export class GameManager extends Component {
         }
     }
 
+    /**
+     * Called when bird touches another collider.
+     * @param self Bird collider.
+     * @param other Collider that hit the bird.
+     * @param contact Physics contact info, can be null.
+     * @returns Sets hit flag and plays hit sound.
+     */
     onBeginContact(self: Collider2D, other: Collider2D, contact: IPhysics2DContact | null) {
         
         this.bird.hitSomething = true;
@@ -171,6 +223,10 @@ export class GameManager extends Component {
         
     }
 
+    /**
+     * Checks if bird is hit.
+     * @returns Plays die sound and triggers game over when hit.
+     */
     birdStruck() {
         this.onContact();
         
@@ -180,5 +236,3 @@ export class GameManager extends Component {
         }
     }
 }
-
-
