@@ -16,7 +16,6 @@
 
 <p align="center">
   <img src="screenshots/Desktop%20Screenshot%202026.05.12%20-%2016.18.05.92.png" width="260" alt="Gameplay screenshot 1" />
-  <img src="screenshots/Desktop%20Screenshot%202026.05.12%20-%2016.18.04.32.png" width="260" alt="Gameplay screenshot 2" />
 </p>
 
 ## What This Project Is
