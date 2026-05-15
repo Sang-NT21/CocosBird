@@ -1,7 +1,7 @@
 # CocosBird
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Cocos%20Creator-3.6.3-0ea5e9?style=for-the-badge" alt="Cocos Creator 3.6.3" />
+  <img src="https://img.shields.io/badge/Cocos%20Creator-3.6-0ea5e9?style=for-the-badge" alt="Cocos Creator 3.6.3" />
   <img src="https://img.shields.io/badge/Gameplay%20Code-TypeScript-3178c6?style=for-the-badge" alt="Gameplay Code TypeScript" />
   <img src="https://img.shields.io/badge/Genre-2D%20Arcade-f59e0b?style=for-the-badge" alt="2D Arcade" />
   <img src="https://img.shields.io/badge/Status-Portfolio%20Project-22c55e?style=for-the-badge" alt="Portfolio Project" />
